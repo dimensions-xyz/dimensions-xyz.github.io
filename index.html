@@ -1,35 +1,419 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-      <title>Dimensions</title>
-    <meta>
-
-    <style>
-      body {
-        font-family: sans-serif;
-        background-color: rgb(0, 0, 0);
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title id="pageTitle">ByteFlowy | Modern Uygulama ve Dijital Çözümler</title>
+  <!-- Tailwind CSS v3 + Google Fonts + Font Awesome 6 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/png" href="ByteFlowy Logo.png">
+  <link rel="apple-touch-icon" href="ByteFlowy Logo.png">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { scroll-behavior: smooth; background: #fafafc; }
+    /* custom glass morphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.05);
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .glass-dark {
+      background: rgba(19, 15, 64, 0.08);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .hover-lift {
+      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(19, 15, 64, 0.12);
+    }
+    .btn-primary {
+      transition: all 0.2s ease;
+      background: #130F40;
+    }
+    .btn-primary:hover {
+      transform: scale(1.02);
+      background: #1e1a4d;
+      box-shadow: 0 10px 20px -8px #130F40;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    @media (min-width: 640px) {
+      .stat-number { font-size: 2.8rem; }
+    }
+    .hero-blur {
+      background: radial-gradient(circle at 70% 30%, rgba(19,15,64,0.03) 0%, rgba(249,250,251,0) 70%);
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+    }
+    .footer-logo-img {
+      height: 36px;
+      width: auto;
+    }
+    .icon-bg {
+      background: rgba(19, 15, 64, 0.12);
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+    .about-icon-bg {
+      background: rgba(19, 15, 64, 0.08);
+      width: 56px;
+      height: 56px;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lang-switch-btn {
+      transition: all 0.2s;
+    }
+    .lang-active {
+      background-color: #130F40 !important;
+      color: white !important;
+      box-shadow: 0 2px 6px rgba(19,15,64,0.2);
+    }
+    /* Modern animated floating elements */
+    .floating-shape {
+      position: absolute;
+      background: rgba(19, 15, 64, 0.03);
+      border-radius: 62% 38% 72% 28% / 44% 52% 48% 56%;
+      filter: blur(30px);
+      z-index: 0;
+      animation: floatShape 12s infinite alternate ease-in-out;
+    }
+    @keyframes floatShape {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+      100% { transform: translate(20px, 20px) scale(1.1); opacity: 0.8; }
+    }
+    .hero-deco {
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(19,15,64,0.08) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: pulseGlow 6s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.3; transform: scale(0.9);}
+      100% { opacity: 0.7; transform: scale(1.2);}
+    }
+    .social-icon-btn {
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .social-icon-btn:hover {
+      transform: translateY(-4px);
+      background: #130F40;
+      color: white !important;
+      border-color: #130F40;
+    }
+    .toast-notify {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: #130F40;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 500;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#130F40', primaryMuted: '#2d2660' },
+          animation: { 'fade-up': 'fadeUp 0.6s ease-out forwards', 'fade-in': 'fadeIn 0.5s ease forwards' },
+          keyframes: {
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } }
+          }
+        }
       }
+    }
+  </script>
+  <style>
+    html { scroll-padding-top: 88px; }
+    .animate-fade-up { animation: fadeUp 0.5s ease-out forwards; }
+    .animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+  </style>
+</head>
+<body>
 
-      header {
-        padding: 250px;
-        text-align: center;
-        font-size: 35px;
-        color: white;
+  <!-- Toast notification -->
+  <div id="toastMsg" class="toast-notify"><i class="fas fa-check-circle mr-2"></i><span id="toastText">Message sent!</span></div>
+
+  <!-- ========== GLASS NAVBAR ========== -->
+  <nav class="sticky top-0 z-50 glass-nav shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2.5">
+        <img src="ByteFlowy Logo.png" alt="ByteFlowy Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/400x100/130F40/white?text=ByteFlowy'; this.classList.add('fallback-logo')">
+        <span class="font-extrabold text-2xl tracking-tight text-gray-800 ml-1 brand-name">ByteFlowy<span class="text-primary">.</span></span>
+      </div>
+      <div class="hidden md:flex items-center space-x-8 font-medium text-gray-700">
+        <a href="#home" data-key="navHome" class="hover:text-primary transition duration-200">Home</a>
+        <a href="#about" data-key="navCompany" class="hover:text-primary transition duration-200">About</a>
+        <a href="#services" data-key="navOfferings" class="hover:text-primary transition duration-200">Services</a>
+        <a href="#contact" data-key="navConnect" class="hover:text-primary transition duration-200">Contact</a>
+      </div>
+      <div class="flex items-center gap-5">
+        <div class="hidden md:flex items-center gap-2 bg-white/40 backdrop-blur-sm rounded-full p-1 shadow-sm">
+          <button id="lang-en" class="lang-switch-btn text-sm font-semibold px-4 py-1.5 rounded-full transition">EN</button>
+          <button id="lang-tr" class="lang-switch-btn text-sm font-semibold px-4 py-1.5 rounded-full transition">TR</button>
+        </div>
+        <a href="#contact" data-key="btnProject" class="hidden md:inline-block btn-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-md transition">İletişime Geç</a>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-gray-100 pb-4 px-6 flex flex-col space-y-3 text-gray-700 font-medium">
+      <a href="#home" data-key="navHome" class="py-2 hover:text-primary transition">Home</a>
+      <a href="#about" data-key="navCompany" class="py-2 hover:text-primary transition">About</a>
+      <a href="#services" data-key="navOfferings" class="py-2 hover:text-primary transition">Services</a>
+      <a href="#contact" data-key="navConnect" class="py-2 hover:text-primary transition">Contact</a>
+      <div class="flex gap-4 pt-2 border-t border-gray-200 mt-1">
+        <button id="mobile-lang-en" class="text-sm font-semibold px-3 py-1 rounded-full bg-gray-100">EN</button>
+        <button id="mobile-lang-tr" class="text-sm font-semibold px-3 py-1 rounded-full bg-gray-100">TR</button>
+      </div>
+      <a href="#contact" data-key="mobileTouch" class="bg-primary text-white text-center rounded-full py-2 mt-2">İletişime Geç</a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION with animated floating shapes ========== -->
+  <section id="home" class="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-28 hero-blur">
+    <div class="hero-deco"></div>
+    <div class="floating-shape" style="width: 300px; height: 300px; bottom: -60px; left: -80px;"></div>
+    <div class="floating-shape" style="width: 220px; height: 220px; top: 15%; right: 0%; animation-duration: 15s;"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 relative z-2">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-14">
+        <div class="flex-1 animate-fade-up">
+          <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6">
+            <i class="fas fa-bolt text-primary text-sm"></i>
+            <span data-key="heroBadge" class="text-primary font-semibold text-sm tracking-wide">Mobile · Web · Backend</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 leading-[1.15]">
+            <span data-key="heroLine1">Where ideas</span> <br> 
+            <span class="text-primary" data-key="heroLine2">turn into reality</span>
+          </h1>
+          <p data-key="heroDesc" class="text-gray-600 text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
+            ByteFlowy crafts premium digital experiences from powerful mobile apps to intelligent web platforms. We guide you from concept to global launch.
+          </p>
+          <div class="flex flex-wrap gap-4 mt-8">
+            <a href="#contact" class="btn-primary text-white font-semibold px-8 py-3.5 rounded-full shadow-lg transition flex items-center gap-2">
+              <span data-key="heroBtn1">Start a conversation</span> <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+            <a href="#services" class="border border-gray-300 bg-white/60 backdrop-blur-sm text-gray-800 font-semibold px-7 py-3.5 rounded-full hover:border-primary hover:text-primary transition shadow-sm">
+              <span data-key="heroBtn2">Discover solutions</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mt-14 pt-6 border-t border-gray-200/40">
+            <div class="glass-dark rounded-2xl p-3 text-center"><p class="stat-number text-primary">64+</p><p data-key="stat1" class="text-gray-600 text-sm font-medium">Projects Done</p></div>
+            <div class="glass-dark rounded-2xl p-3 text-center"><p class="stat-number text-primary">7+</p><p data-key="stat2" class="text-gray-600 text-sm font-medium">Years Crafting</p></div>
+            <div class="glass-dark rounded-2xl p-3 text-center"><p class="stat-number text-primary">32+</p><p data-key="stat3" class="text-gray-600 text-sm font-medium">Global Clients</p></div>
+            <div class="glass-dark rounded-2xl p-3 text-center"><p class="stat-number text-primary">15+</p><p data-key="stat4" class="text-gray-600 text-sm font-medium">Countries</p></div>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center lg:justify-end animate-fade-up delay-100">
+          <div class="relative w-full max-w-md">
+            <div class="glass-card rounded-3xl p-2 shadow-xl overflow-hidden relative group">
+              <img src="https://placehold.co/600x520/f7f7fe/130F40?text=✦+ByteFlowy+Studio+✦&font=montserrat" alt="app mockup" class="rounded-2xl w-full object-cover transition-transform duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent rounded-2xl pointer-events-none"></div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 glass-card rounded-xl p-3 hidden md:flex items-center gap-3 shadow-md animate-pulse">
+              <i class="fas fa-crown text-primary text-xl"></i>
+              <span data-key="premiumBadge" class="font-semibold text-gray-800">Premium quality</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT SECTION ========== -->
+  <section id="about" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+      <div class="flex flex-col lg:flex-row gap-12 items-center">
+        <div class="flex-1 order-2 lg:order-1">
+          <div class="grid grid-cols-2 gap-5">
+            <div class="bg-primary/5 rounded-2xl p-5 text-center hover-lift transition"><div class="about-icon-bg mx-auto mb-3"><i class="fas fa-layer-group text-primary text-2xl"></i></div><h4 data-key="aboutBox1Title" class="font-bold">Full-cycle dev</h4><p data-key="aboutBox1Desc" class="text-sm text-gray-500">Discovery → Store</p></div>
+            <div class="bg-primary/5 rounded-2xl p-5 text-center hover-lift transition"><div class="about-icon-bg mx-auto mb-3"><i class="fas fa-microchip text-primary text-2xl"></i></div><h4 data-key="aboutBox2Title" class="font-bold">AI Integration</h4><p data-key="aboutBox2Desc" class="text-sm text-gray-500">Smart features</p></div>
+            <div class="bg-primary/5 rounded-2xl p-5 text-center hover-lift transition"><div class="about-icon-bg mx-auto mb-3"><i class="fas fa-chart-line text-primary text-2xl"></i></div><h4 data-key="aboutBox3Title" class="font-bold">Scale-ready</h4><p data-key="aboutBox3Desc" class="text-sm text-gray-500">Cloud native</p></div>
+            <div class="bg-primary/5 rounded-2xl p-5 text-center hover-lift transition"><div class="about-icon-bg mx-auto mb-3"><i class="fas fa-shield-alt text-primary text-2xl"></i></div><h4 data-key="aboutBox4Title" class="font-bold">Security first</h4><p data-key="aboutBox4Desc" class="text-sm text-gray-500">GDPR compliant</p></div>
+          </div>
+        </div>
+        <div class="flex-1 order-1 lg:order-2">
+          <span data-key="aboutBadge" class="text-primary font-semibold text-sm uppercase tracking-wider bg-primary/10 inline-block px-4 py-1.5 rounded-full">Who we are</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-5 text-gray-900 leading-tight"><span data-key="aboutHeading1">Digital craftsmanship &</span> <span class="text-primary" data-key="aboutHeading2">strategic mindset</span></h2>
+          <p data-key="aboutDesc" class="text-gray-600 text-lg mt-6 leading-relaxed">ByteFlowy is an innovation-driven software studio specialized in building high-performance iOS, Android and full‑stack web solutions. We don’t just write code — we engineer growth. With a relentless focus on UX, scalability and modern architecture, we bring ambitious ideas to the digital forefront.</p>
+          <div class="flex flex-wrap gap-6 mt-8"><div class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i><span data-key="aboutFeature1">Transparent process</span></div><div class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i><span data-key="aboutFeature2">Agile methodology</span></div><div class="flex items-center gap-2"><i class="fas fa-check-circle text-primary"></i><span data-key="aboutFeature3">Dedicated team</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section id="services" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+      <div class="text-center max-w-2xl mx-auto mb-14"><span data-key="servicesBadge" class="text-primary font-semibold bg-primary/10 px-4 py-1.5 rounded-full text-sm">core expertise</span><h2 class="text-3xl md:text-4xl font-bold mt-4 text-gray-900"><span data-key="servicesTitle1">What makes </span><span class="text-primary" data-key="servicesTitle2">ByteFlowy different</span></h2><p data-key="servicesSub" class="text-gray-500 mt-4 text-lg">Holistic digital solutions that blend design, engineering, and innovation.</p></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div class="glass-card rounded-2xl p-7 hover-lift transition-all"><div class="icon-bg mb-5"><i class="fas fa-mobile-alt text-primary text-2xl"></i></div><h3 class="text-xl font-bold text-gray-800" data-key="service1Title">iOS & Android</h3><p class="text-gray-500 mt-2" data-key="service1Desc">Native (Swift/Kotlin) & Flutter apps with fluid animations.</p></div>
+        <div class="glass-card rounded-2xl p-7 hover-lift transition-all"><div class="icon-bg mb-5"><i class="fas fa-code-branch text-primary text-2xl"></i></div><h3 class="text-xl font-bold text-gray-800" data-key="service2Title">Web Platforms</h3><p class="text-gray-500 mt-2" data-key="service2Desc">React, Next.js, Node.js, scalable dashboards, PWAs.</p></div>
+        <div class="glass-card rounded-2xl p-7 hover-lift transition-all"><div class="icon-bg mb-5"><i class="fas fa-palette text-primary text-2xl"></i></div><h3 class="text-xl font-bold text-gray-800" data-key="service3Title">Product Design</h3><p class="text-gray-500 mt-2" data-key="service3Desc">UI/UX strategy, prototyping, conversion-centered design.</p></div>
+        <div class="glass-card rounded-2xl p-7 hover-lift transition-all"><div class="icon-bg mb-5"><i class="fas fa-brain text-primary text-2xl"></i></div><h3 class="text-xl font-bold text-gray-800" data-key="service4Title">AI & Backend</h3><p class="text-gray-500 mt-2" data-key="service4Desc">LLM integration, cloud infrastructure.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BANNER -->
+  <section class="py-16 bg-primary/5">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12"><div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-between"><div><h3 data-key="trustTitle" class="text-2xl md:text-3xl font-bold text-gray-800">Trusted by fast‑growing brands</h3><p data-key="trustSub" class="text-gray-600 mt-1">From startups to enterprises we deliver results.</p></div><div class="flex flex-wrap gap-8 items-center"><div class="text-center"><i class="fas fa-rocket text-primary text-3xl mb-1"></i><div class="font-black text-primary text-2xl">97%</div><span data-key="trustStat1" class="text-sm text-gray-500">client retention</span></div><div class="text-center"><i class="fas fa-clock text-primary text-3xl mb-1"></i><div class="font-black text-primary text-2xl">150k+</div><span data-key="trustStat2" class="text-sm text-gray-500">dev hours delivered</span></div><div class="text-center"><i class="fas fa-star text-primary text-3xl mb-1"></i><div class="font-black text-primary text-2xl">5.0</div><span data-key="trustStat3" class="text-sm text-gray-500">avg rating</span></div></div></div></div>
+  </section>
+
+  <!-- ========== CONTACT SECTION with Name + Message only, mailto redirect ========== -->
+  <section id="contact" class="py-20 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid md:grid-cols-2 gap-10 items-stretch">
+        <div class="glass-card rounded-3xl p-8 md:p-10 flex flex-col justify-between"><div><span data-key="contactBadge" class="text-primary font-semibold text-sm uppercase tracking-wide">Get in touch</span><h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900"><span data-key="contactTitle1">Let's build something </span><br><span class="text-primary" data-key="contactTitle2">extraordinary</span></h2><p data-key="contactDesc" class="text-gray-500 mt-4 mb-8">We’d love to hear about your project, ideas, or any questions you may have.</p><div class="space-y-5"><div class="flex items-center gap-4"><i class="fas fa-globe-americas text-primary text-xl w-6"></i><span data-key="contactAddress" class="text-gray-700">Istanbul, Türkiye</span></div><div class="flex items-center gap-4"><i class="fas fa-paper-plane text-primary text-xl w-6"></i><span class="text-gray-700">contact@byteflowy.com</span></div></div></div><div class="mt-10"></div></div>
+        <div class="bg-white shadow-xl rounded-3xl p-8 md:p-10 border border-gray-100"><h3 data-key="formTitle" class="text-2xl font-bold text-gray-800">Send a message</h3>
+          <form id="contactForm" class="space-y-5 mt-4">
+            <div><input type="text" id="userName" data-key-placeholder="formName" placeholder="Full name *" class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:border-primary outline-none" required></div>
+            <div><textarea id="userMessage" rows="4" data-key-placeholder="formMsg" placeholder="Tell us about your idea / project..." class="w-full px-5 py-3.5 rounded-xl border border-gray-200 resize-none outline-none" required></textarea></div>
+            <button type="submit" class="btn-primary text-white font-bold py-3.5 px-8 rounded-xl w-full shadow-md transition"><span data-key="formBtn">Send</span> <i class="fas fa-arrow-right ml-1"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER WITH SOCIAL ICONS ========== -->
+  <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div><div class="flex items-center gap-2"><img src="ByteFlowy Logo.png" alt="ByteFlowy Logo" class="footer-logo-img" onerror="this.onerror=null; this.src='https://placehold.co/200x60/130F40/white?text=ByteFlowy'"><span class="font-bold text-2xl text-white ml-1">ByteFlowy<span class="text-primary">.</span></span></div><p data-key="footerDesc" class="mt-4 text-gray-400 text-sm">Modern digital products engineered for seamless human experiences.</p><div class="flex gap-4 mt-6"><a href="https://instagram.com/dimensions.xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-instagram text-xl"></i></a><a href="https://www.linkedin.com/in/yusuf-kumral/" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-linkedin-in text-xl"></i></a><a href="https://github.com/dimensions-xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-github text-xl"></i></a><a href="https://play.google.com/store/apps/developer?id=Dimensions+Inc&hl=en" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-google-play text-xl"></i></a></div></div>
+        <div><h4 data-key="footerExplore" class="text-white font-semibold mb-3">Explore</h4><ul class="space-y-2 text-sm"><li><a href="#home" class="hover:text-primary transition">Home</a></li><li><a href="#about" class="hover:text-primary transition">About</a></li><li><a href="#services" class="hover:text-primary transition">Services</a></li><li><a href="#contact" class="hover:text-primary transition">Contact</a></li></ul></div>
+        <div><h4 data-key="footerCaps" class="text-white font-semibold mb-3">Capabilities</h4><ul class="space-y-2 text-sm"><li data-key="cap1">iOS & Android</li><li data-key="cap2">Web Apps</li><li data-key="cap3">UI/UX Strategy</li><li data-key="cap4">AI & Backend</li></ul></div>
+        <div><h4 data-key="footerLegal" class="text-white font-semibold mb-3">Legal</h4><ul class="space-y-2 text-sm"><li data-key="legal1">Privacy & Policy</li><li data-key="legal2">Terms of Use</li><li data-key="legal3">Cookie Statement</li><li data-key="legal4">Imprint</li></ul></div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500"><p>© 2026 ByteFlowy - <span data-key="copyright">Innovation driven. All rights reserved.</span></p></div>
+    </div>
+  </footer>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const toastDiv = document.getElementById('toastMsg');
+    const toastText = document.getElementById('toastText');
+    function showToast(message, isError = false) {
+      toastText.innerText = message;
+      toastDiv.style.background = isError ? '#b91c1c' : '#130F40';
+      toastDiv.style.opacity = '1';
+      setTimeout(() => { toastDiv.style.opacity = '0'; }, 3000);
+    }
+    
+      contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('userName').value.trim();
+          const message = document.getElementById('userMessage').value.trim();
+          if(!name || !message) { 
+            if (currentLang === 'tr') {
+              showToast("Lütfen adınızı ve mesajınızı girin", true);
+            } else {
+              showToast("Please enter your name and message", true);
+            }
+            return; 
+          }
+          const subject = `ByteFlowy Contact from ${name}`;
+          const body = `Name: ${name}%0A%0AMessage: ${message}`;
+          window.location.href = `mailto:contact@byteflowy.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+          if (currentLang === 'tr') {
+            showToast("Yönlendiriliyor: E-posta istemciniz açılacak...", false);
+          } else {
+            showToast("Redirecting: Your email client will open...", false);
+          }
+          contactForm.reset();
+      });
+
+    const translations = {
+      en: { 
+        pageTitle: "ByteFlowy | Modern App & Digital Solutions",
+        navHome: "Home", navCompany: "About", navOfferings: "Services", navConnect: "Contact", btnProject: "Get in touch", mobileTouch: "Get in touch", heroBadge: "Mobile · Web · Backend", heroLine1: "Where ideas", heroLine2: "turn into reality", heroDesc: "ByteFlowy crafts premium digital experiences from powerful mobile apps to intelligent web platforms. We guide you from concept to global launch.", heroBtn1: "Start a conversation", heroBtn2: "Discover solutions", stat1: "Projects Done", stat2: "Years Crafting", stat3: "Global Clients", stat4: "Countries", premiumBadge: "Premium quality", aboutBadge: "Who we are", aboutHeading1: "Digital craftsmanship &", aboutHeading2: "strategic mindset", aboutDesc: "ByteFlowy is an innovation-driven software studio specialized in building high-performance iOS, Android and full‑stack web solutions. We don’t just write code, we engineer growth. With a relentless focus on UX, scalability and modern architecture, we bring ambitious ideas to the digital forefront.", aboutFeature1: "Transparent process", aboutFeature2: "Agile methodology", aboutFeature3: "Dedicated team", aboutBox1Title: "Full-cycle dev", aboutBox1Desc: "Discovery → Store", aboutBox2Title: "AI Integration", aboutBox2Desc: "Smart features", aboutBox3Title: "Scale-ready", aboutBox3Desc: "Cloud native", aboutBox4Title: "Security first", aboutBox4Desc: "GDPR compliant", servicesBadge: "core expertise", servicesTitle1: "What makes ", servicesTitle2: "ByteFlowy different", servicesSub: "Holistic digital solutions that blend design, engineering, and innovation.", service1Title: "iOS & Android", service1Desc: "Native (Swift/Kotlin) & Flutter apps with fluid animations.", service2Title: "Web Platforms", service2Desc: "React, Next.js, Node.js, scalable dashboards, PWAs.", service3Title: "Product Design", service3Desc: "UI/UX strategy, prototyping, conversion-centered design.", service4Title: "AI & Backend", service4Desc: "LLM integration, cloud infrastructure.", trustTitle: "Trusted by fast‑growing brands", trustSub: "From startups to enterprises we deliver results.", trustStat1: "client retention", trustStat2: "dev hours delivered", trustStat3: "avg rating", contactBadge: "Get in touch", contactTitle1: "Let's build something", contactTitle2: "extraordinary", contactDesc: "We’d love to hear about your project, ideas, or any questions you may have.", contactAddress: "Istanbul, Türkiye", formTitle: "Send a message", formName: "Full name *", formMsg: "Tell us about your idea / project...", formBtn: "Send", footerDesc: "Modern digital products engineered for seamless human experiences.", footerExplore: "Explore", footerCaps: "Capabilities", footerLegal: "Legal", cap1: "iOS & Android", cap2: "Web Apps", cap3: "UI/UX Strategy", cap4: "AI & Backend", legal1: "Privacy & Policy", legal2: "Terms of Use", legal3: "Cookie Statement", legal4: "Imprint", copyright: "Innovation driven. All rights reserved." 
+      },
+      tr: { 
+        pageTitle: "ByteFlowy | Modern Uygulama ve Dijital Çözümler",
+        navHome: "Ana Sayfa", navCompany: "Hakkımızda", navOfferings: "Hizmetler", navConnect: "İletişim", btnProject: "İletişime Geç", mobileTouch: "İletişime Geç", heroBadge: "Mobil · Web · Backend", heroLine1: "Fikirlerinizin", heroLine2: "gerçeğe dönüştüğü yer", heroDesc: "ByteFlowy, güçlü mobil uygulamalardan akıllı web platformlarına kadar premium dijital deneyimler sunar. Sizi konseptten küresel lansmana kadar yönlendiriyoruz.", heroBtn1: "Sohbet Başlat", heroBtn2: "Çözümleri Keşfet", stat1: "Tamamlanan Proje", stat2: "Yıl Deneyim", stat3: "Küresel Müşteri", stat4: "Ülke", premiumBadge: "Premium kalite", aboutBadge: "Biz Kimiz", aboutHeading1: "Dijital zanaatkarlık &", aboutHeading2: "stratejik zihniyet", aboutDesc: "ByteFlowy, yüksek performanslı iOS, Android ve full-stack web çözümleri geliştirme konusunda uzmanlaşmış, inovasyon odaklı bir yazılım stüdyosudur. Sadece kod yazmıyoruz, büyüme mühendisliği yapıyoruz. UX, ölçeklenebilirlik ve modern mimariye odaklanarak iddialı fikirleri dijital ön plana taşıyoruz.", aboutFeature1: "Şeffaf süreç", aboutFeature2: "Çevik metodoloji", aboutFeature3: "Özel ekip", aboutBox1Title: "Tam döngü geliştirme", aboutBox1Desc: "Keşif → Mağaza", aboutBox2Title: "AI Entegrasyonu", aboutBox2Desc: "Akıllı özellikler", aboutBox3Title: "Ölçeklenebilir", aboutBox3Desc: "Bulut tabanlı", aboutBox4Title: "Önce Güvenlik", aboutBox4Desc: "GDPR uyumlu", servicesBadge: "temel uzmanlık", servicesTitle1: "ByteFlowy'yi farklı kılan ", servicesTitle2: "nedir?", servicesSub: "Tasarım, mühendislik ve inovasyonu harmanlayan bütünsel dijital çözümler.", service1Title: "iOS ve Android", service1Desc: "Native (Swift/Kotlin) ve Flutter uygulamaları akıcı animasyonlarla.", service2Title: "Web Platformları", service2Desc: "React, Next.js, Node.js, ölçeklenebilir panolar, PWA'lar.", service3Title: "Ürün Tasarımı", service3Desc: "UI/UX stratejisi, prototipleme, dönüşüm odaklı tasarım.", service4Title: "AI ve Backend", service4Desc: "LLM entegrasyonu, bulut altyapısı.", trustTitle: "Hızlı büyüyen markaların güvencesi", trustSub: "Girişimlerden kurumsallara sonuç teslim ederiz.", trustStat1: "müşteri memnuniyeti", trustStat2: "saat teslim edilen iş", trustStat3: "ortalama puan", contactBadge: "İletişime Geç", contactTitle1: "Birlikte olağanüstü", contactTitle2: "bir şey inşa edelim", contactDesc: "Projenizi, fikirlerinizi veya sorularınızı duymayı çok isteriz.", contactAddress: "İstanbul, Türkiye", formTitle: "Mesaj Gönder", formName: "Tam adınız *", formMsg: "Proje fikrinizi bize anlatın...", formBtn: "Gönder", footerDesc: "Modern dijital ürünler, kusursuz insan deneyimleri için tasarlanmıştır.", footerExplore: "Keşfet", footerCaps: "Yetenekler", footerLegal: "Yasal", cap1: "iOS ve Android", cap2: "Web Uygulamaları", cap3: "UI/UX Stratejisi", cap4: "AI ve Backend", legal1: "Gizlilik Politikası", legal2: "Kullanım Şartları", legal3: "Çerez Politikası", legal4: "Künye", copyright: "İnovasyon odaklı. Tüm hakları saklıdır." 
       }
-    </style>
-
-  </head>
-
-
-  <body>
-
-    <header>
-      <h2>Bu site şu anda bakımda, daha sonra gel ;( </h2>
-    </header>
-
-  </body>
-
+    };
+    let currentLang = 'tr';
+    function setLanguage(lang) { 
+      currentLang = lang; 
+      const t = translations[lang]; 
+      const titleEl = document.getElementById('pageTitle');
+      if(titleEl && t.pageTitle) titleEl.innerText = t.pageTitle;
+      
+      document.querySelectorAll('[data-key]').forEach(el => { 
+        const key = el.getAttribute('data-key'); 
+        if(t[key]) el.innerText = t[key]; 
+      }); 
+      document.querySelectorAll('[data-key-placeholder]').forEach(el => { 
+        const key = el.getAttribute('data-key-placeholder'); 
+        if(t[key]) el.placeholder = t[key]; 
+      }); 
+      const enBtns = [document.getElementById('lang-en'), document.getElementById('mobile-lang-en')]; 
+      const trBtns = [document.getElementById('lang-tr'), document.getElementById('mobile-lang-tr')]; 
+      enBtns.forEach(btn => { if(btn) { btn.classList.remove('lang-active'); btn.classList.add('bg-gray-100', 'text-gray-800'); } }); 
+      trBtns.forEach(btn => { if(btn) { btn.classList.remove('lang-active'); btn.classList.add('bg-gray-100', 'text-gray-800'); } }); 
+      if(lang === 'en') enBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } }); 
+      else trBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } }); 
+    }
+    document.getElementById('lang-en')?.addEventListener('click', () => setLanguage('en')); 
+    document.getElementById('lang-tr')?.addEventListener('click', () => setLanguage('tr')); 
+    document.getElementById('mobile-lang-en')?.addEventListener('click', () => setLanguage('en')); 
+    document.getElementById('mobile-lang-tr')?.addEventListener('click', () => setLanguage('tr')); 
+    setLanguage('tr');
+    const menuBtn = document.getElementById('mobile-menu-btn'); 
+    const mobileMenu = document.getElementById('mobile-menu'); 
+    if(menuBtn) menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden')); 
+    document.querySelectorAll('#mobile-menu a[href^="#"]').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden'))); 
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => { 
+      anchor.addEventListener('click', function(e) { 
+        const targetId = this.getAttribute('href'); 
+        if(targetId === "#") return; 
+        const target = document.querySelector(targetId); 
+        if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } 
+      }); 
+    });
+  </script>
+</body>
 </html>
