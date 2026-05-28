@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title id="pageTitle">ByteFlowy | Modern Uygulama ve Dijital Çözümler</title>
+  <meta name="description" id="metaDescription" content="ByteFlowy, güçlü mobil uygulamalardan akıllı web platformlarına kadar premium dijital deneyimler sunan yenilikçi bir yazılım stüdyosudur. iOS, Android, web ve AI çözümleri.">
   <!-- Tailwind CSS v3 + Google Fonts + Font Awesome 6 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -322,7 +323,7 @@
   <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div><div class="flex items-center gap-2"><img src="ByteFlowy Logo.png" alt="ByteFlowy Logo" class="footer-logo-img" onerror="this.onerror=null; this.src='https://placehold.co/200x60/130F40/white?text=ByteFlowy'"><span class="font-bold text-2xl text-white ml-1">ByteFlowy<span class="text-primary">.</span></span></div><p data-key="footerDesc" class="mt-4 text-gray-400 text-sm">Modern digital products engineered for seamless human experiences.</p><div class="flex gap-4 mt-6"><a href="https://instagram.com/dimensions.xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-instagram text-xl"></i></a><a href="https://www.linkedin.com/in/yusuf-kumral/" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-linkedin-in text-xl"></i></a><a href="https://github.com/dimensions-xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-github text-xl"></i></a><a href="https://play.google.com/store/apps/developer?id=ByteFlowy+Inc." target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-google-play text-xl"></i></a></div></div>
+        <div><div class="flex items-center gap-2"><img src="ByteFlowy Logo.png" alt="ByteFlowy Logo" class="footer-logo-img" onerror="this.onerror=null; this.src='https://placehold.co/200x60/130F40/white?text=ByteFlowy'"><span class="font-bold text-2xl text-white ml-1">ByteFlowy<span class="text-primary">.</span></span></div><p data-key="footerDesc" class="mt-4 text-gray-400 text-sm">Modern digital products engineered for seamless human experiences.</p><div class="flex gap-4 mt-6"><a href="https://instagram.com/dimensions.xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-instagram text-xl"></i></a><a href="https://www.linkedin.com/in/yusuf-kumral/" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-linkedin-in text-xl"></i></a><a href="https://github.com/dimensions-xyz" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-github text-xl"></i></a><a href="https://play.google.com/store/apps/dev?id=8030997730432386928" target="_blank" class="social-icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all"><i class="fab fa-google-play text-xl"></i></a></div></div>
         <div><h4 data-key="footerExplore" class="text-white font-semibold mb-3">Explore</h4><ul class="space-y-2 text-sm"><li><a href="#home" class="hover:text-primary transition">Home</a></li><li><a href="#about" class="hover:text-primary transition">About</a></li><li><a href="#services" class="hover:text-primary transition">Services</a></li><li><a href="#contact" class="hover:text-primary transition">Contact</a></li></ul></div>
         <div><h4 data-key="footerCaps" class="text-white font-semibold mb-3">Capabilities</h4><ul class="space-y-2 text-sm"><li data-key="cap1">iOS & Android</li><li data-key="cap2">Web Apps</li><li data-key="cap3">UI/UX Strategy</li><li data-key="cap4">AI & Backend</li></ul></div>
         <div><h4 data-key="footerLegal" class="text-white font-semibold mb-3">Legal</h4><ul class="space-y-2 text-sm"><li data-key="legal1">Privacy & Policy</li><li data-key="legal2">Terms of Use</li><li data-key="legal3">Cookie Statement</li><li data-key="legal4">Imprint</li></ul></div>
@@ -342,7 +343,27 @@
       setTimeout(() => { toastDiv.style.opacity = '0'; }, 3000);
     }
     
-      contactForm.addEventListener('submit', function(e) {
+    const userNameInput = document.getElementById('userName');
+    const userMessageInput = document.getElementById('userMessage');
+
+    function updateValidationMessages() {
+      if (currentLang === 'tr') {
+        userNameInput.setCustomValidity("Lütfen adınızı girin");
+        userMessageInput.setCustomValidity("Lütfen mesajınızı girin");
+      } else {
+        userNameInput.setCustomValidity("Please enter your name");
+        userMessageInput.setCustomValidity("Please enter your message");
+      }
+    }
+
+    userNameInput.addEventListener('input', function() {
+      this.setCustomValidity('');
+    });
+    userMessageInput.addEventListener('input', function() {
+      this.setCustomValidity('');
+    });
+    
+    contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
           const name = document.getElementById('userName').value.trim();
           const message = document.getElementById('userMessage').value.trim();
@@ -368,10 +389,12 @@
     const translations = {
       en: { 
         pageTitle: "ByteFlowy | Modern App & Digital Solutions",
+        metaDesc: "ByteFlowy is an innovative software studio crafting premium digital experiences from powerful mobile apps to intelligent web platforms. iOS, Android, web development and AI solutions.",
         navHome: "Home", navCompany: "About", navOfferings: "Services", navConnect: "Contact", btnProject: "Get in touch", mobileTouch: "Get in touch", heroBadge: "Mobile · Web · Backend", heroLine1: "Where ideas", heroLine2: "turn into reality", heroDesc: "ByteFlowy crafts premium digital experiences from powerful mobile apps to intelligent web platforms. We guide you from concept to global launch.", heroBtn1: "Start a conversation", heroBtn2: "Discover solutions", stat1: "Projects Done", stat2: "Years Crafting", stat3: "Global Clients", stat4: "Countries", premiumBadge: "Premium quality", aboutBadge: "Who we are", aboutHeading1: "Digital craftsmanship &", aboutHeading2: "strategic mindset", aboutDesc: "ByteFlowy is an innovation-driven software studio specialized in building high-performance iOS, Android and full‑stack web solutions. We don’t just write code, we engineer growth. With a relentless focus on UX, scalability and modern architecture, we bring ambitious ideas to the digital forefront.", aboutFeature1: "Transparent process", aboutFeature2: "Agile methodology", aboutFeature3: "Dedicated team", aboutBox1Title: "Full-cycle dev", aboutBox1Desc: "Discovery → Store", aboutBox2Title: "AI Integration", aboutBox2Desc: "Smart features", aboutBox3Title: "Scale-ready", aboutBox3Desc: "Cloud native", aboutBox4Title: "Security first", aboutBox4Desc: "GDPR compliant", servicesBadge: "core expertise", servicesTitle1: "What makes ", servicesTitle2: "ByteFlowy different", servicesSub: "Holistic digital solutions that blend design, engineering, and innovation.", service1Title: "iOS & Android", service1Desc: "Native (Swift/Kotlin) & Flutter apps with fluid animations.", service2Title: "Web Platforms", service2Desc: "React, Next.js, Node.js, scalable dashboards, PWAs.", service3Title: "Product Design", service3Desc: "UI/UX strategy, prototyping, conversion-centered design.", service4Title: "AI & Backend", service4Desc: "LLM integration, cloud infrastructure.", trustTitle: "Trusted by fast‑growing brands", trustSub: "From startups to enterprises we deliver results.", trustStat1: "client retention", trustStat2: "dev hours delivered", trustStat3: "avg rating", contactBadge: "Get in touch", contactTitle1: "Let's build something", contactTitle2: "extraordinary", contactDesc: "We’d love to hear about your project, ideas, or any questions you may have.", contactAddress: "Istanbul, Türkiye", formTitle: "Send a message", formName: "Full name *", formMsg: "Tell us about your idea / project...", formBtn: "Send", footerDesc: "Modern digital products engineered for seamless human experiences.", footerExplore: "Explore", footerCaps: "Capabilities", footerLegal: "Legal", cap1: "iOS & Android", cap2: "Web Apps", cap3: "UI/UX Strategy", cap4: "AI & Backend", legal1: "Privacy & Policy", legal2: "Terms of Use", legal3: "Cookie Statement", legal4: "Imprint", copyright: "Innovation driven. All rights reserved." 
       },
       tr: { 
         pageTitle: "ByteFlowy | Modern Uygulama ve Dijital Çözümler",
+        metaDesc: "ByteFlowy, güçlü mobil uygulamalardan akıllı web platformlarına kadar premium dijital deneyimler sunan yenilikçi bir yazılım stüdyosudur. iOS, Android, web ve AI çözümleri.",
         navHome: "Ana Sayfa", navCompany: "Hakkımızda", navOfferings: "Hizmetler", navConnect: "İletişim", btnProject: "İletişime Geç", mobileTouch: "İletişime Geç", heroBadge: "Mobil · Web · Backend", heroLine1: "Fikirlerinizin", heroLine2: "gerçeğe dönüştüğü yer", heroDesc: "ByteFlowy, güçlü mobil uygulamalardan akıllı web platformlarına kadar premium dijital deneyimler sunar. Sizi konseptten küresel lansmana kadar yönlendiriyoruz.", heroBtn1: "Sohbet Başlat", heroBtn2: "Çözümleri Keşfet", stat1: "Tamamlanan Proje", stat2: "Yıl Deneyim", stat3: "Küresel Müşteri", stat4: "Ülke", premiumBadge: "Premium kalite", aboutBadge: "Biz Kimiz", aboutHeading1: "Dijital zanaatkarlık &", aboutHeading2: "stratejik zihniyet", aboutDesc: "ByteFlowy, yüksek performanslı iOS, Android ve full-stack web çözümleri geliştirme konusunda uzmanlaşmış, inovasyon odaklı bir yazılım stüdyosudur. Sadece kod yazmıyoruz, büyüme mühendisliği yapıyoruz. UX, ölçeklenebilirlik ve modern mimariye odaklanarak iddialı fikirleri dijital ön plana taşıyoruz.", aboutFeature1: "Şeffaf süreç", aboutFeature2: "Çevik metodoloji", aboutFeature3: "Özel ekip", aboutBox1Title: "Tam döngü geliştirme", aboutBox1Desc: "Keşif → Mağaza", aboutBox2Title: "AI Entegrasyonu", aboutBox2Desc: "Akıllı özellikler", aboutBox3Title: "Ölçeklenebilir", aboutBox3Desc: "Bulut tabanlı", aboutBox4Title: "Önce Güvenlik", aboutBox4Desc: "GDPR uyumlu", servicesBadge: "temel uzmanlık", servicesTitle1: "ByteFlowy'yi farklı kılan ", servicesTitle2: "nedir?", servicesSub: "Tasarım, mühendislik ve inovasyonu harmanlayan bütünsel dijital çözümler.", service1Title: "iOS ve Android", service1Desc: "Native (Swift/Kotlin) ve Flutter uygulamaları akıcı animasyonlarla.", service2Title: "Web Platformları", service2Desc: "React, Next.js, Node.js, ölçeklenebilir panolar, PWA'lar.", service3Title: "Ürün Tasarımı", service3Desc: "UI/UX stratejisi, prototipleme, dönüşüm odaklı tasarım.", service4Title: "AI ve Backend", service4Desc: "LLM entegrasyonu, bulut altyapısı.", trustTitle: "Hızlı büyüyen markaların güvencesi", trustSub: "Girişimlerden kurumsallara sonuç teslim ederiz.", trustStat1: "müşteri memnuniyeti", trustStat2: "saat teslim edilen iş", trustStat3: "ortalama puan", contactBadge: "İletişime Geç", contactTitle1: "Birlikte olağanüstü", contactTitle2: "bir şey inşa edelim", contactDesc: "Projenizi, fikirlerinizi veya sorularınızı duymayı çok isteriz.", contactAddress: "İstanbul, Türkiye", formTitle: "Mesaj Gönder", formName: "Tam adınız *", formMsg: "Proje fikrinizi bize anlatın...", formBtn: "Gönder", footerDesc: "Modern dijital ürünler, kusursuz insan deneyimleri için tasarlanmıştır.", footerExplore: "Keşfet", footerCaps: "Yetenekler", footerLegal: "Yasal", cap1: "iOS ve Android", cap2: "Web Uygulamaları", cap3: "UI/UX Stratejisi", cap4: "AI ve Backend", legal1: "Gizlilik Politikası", legal2: "Kullanım Şartları", legal3: "Çerez Politikası", legal4: "Künye", copyright: "İnovasyon odaklı. Tüm hakları saklıdır." 
       }
     };
@@ -381,6 +404,11 @@
       const t = translations[lang]; 
       const titleEl = document.getElementById('pageTitle');
       if(titleEl && t.pageTitle) titleEl.innerText = t.pageTitle;
+      
+      const metaDesc = document.getElementById('metaDescription');
+      if (metaDesc && t.metaDesc) {
+        metaDesc.setAttribute('content', t.metaDesc);
+      }
       
       document.querySelectorAll('[data-key]').forEach(el => { 
         const key = el.getAttribute('data-key'); 
@@ -395,7 +423,9 @@
       enBtns.forEach(btn => { if(btn) { btn.classList.remove('lang-active'); btn.classList.add('bg-gray-100', 'text-gray-800'); } }); 
       trBtns.forEach(btn => { if(btn) { btn.classList.remove('lang-active'); btn.classList.add('bg-gray-100', 'text-gray-800'); } }); 
       if(lang === 'en') enBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } }); 
-      else trBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } }); 
+      else trBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } });
+      
+      updateValidationMessages();
     }
     document.getElementById('lang-en')?.addEventListener('click', () => setLanguage('en')); 
     document.getElementById('lang-tr')?.addEventListener('click', () => setLanguage('tr')); 
