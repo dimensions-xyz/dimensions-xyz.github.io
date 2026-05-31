@@ -64,49 +64,88 @@
       z-index: 0;
     }
     
-    /* ----- BLOB SYSTEM: LARGE, EXTRA BLUR, GENTLE FLOATING ----- */
-    .blob {
+    /* ===== BLOB BASE SYSTEM (FIXED + CLEAN) ===== */
+    
+    .blob-wrap {
       position: fixed;
-      border-radius: 62% 38% 72% 28% / 44% 52% 48% 56%;
-      filter: blur(70px);
-      opacity: 0.3;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
       pointer-events: none;
-      z-index: 0;
       will-change: transform;
-      animation: floatBlob ease-in-out infinite alternate;
+      z-index: 0;
     }
+    
+    .blob {
+      width: 100%;
+      height: 100%;
+      border-radius: 62% 38% 72% 28% / 44% 52% 48% 56%;
+      filter: blur(75px);
+      opacity: 0.26;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* ===== DARKER PURPLE PALETTE ===== */
+    
+    .blob-1 .blob {
+      background: radial-gradient(circle, #4C1D95, #1A0B2E);
+    }
+    
+    .blob-2 .blob {
+      background: radial-gradient(circle, #5B21B6, #140A26);
+    }
+    
+    .blob-3 .blob {
+      background: radial-gradient(circle, #3B0764, #0B0614);
+      opacity: 0.22;
+    }
+    
+    /* ===== SIZES + POSITIONS ===== */
+    
     .blob-1 {
       width: 55vw;
       height: 55vw;
-      background: radial-gradient(circle, #7C3AED, #4C1D95);
       top: -20%;
       left: -15%;
-      animation-duration: 45s;
+      animation: orbit1 18s ease-in-out infinite;
     }
+    
     .blob-2 {
       width: 60vw;
       height: 60vw;
-      background: radial-gradient(circle, #A855F7, #3B0764);
       bottom: -25%;
       right: -20%;
-      animation-duration: 55s;
-      animation-delay: -10s;
+      animation: orbit2 22s ease-in-out infinite reverse;
     }
+    
     .blob-3 {
       width: 45vw;
       height: 45vw;
-      background: radial-gradient(circle, #8B5CF6, #1E1B4B);
       top: 40%;
       left: 30%;
-      animation-duration: 60s;
-      animation-delay: -20s;
-      opacity: 0.25;
-    }
-    @keyframes floatBlob {
-      0% { transform: translate(0px, 0px) scale(1); }
-      100% { transform: translate(25px, 20px) scale(1.08); }
+      animation: orbit3 20s ease-in-out infinite;
     }
     
+    /* ===== SMOOTH ORBIT + MORPH ===== */
+    
+    @keyframes orbit1 {
+      0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(80px) scale(1); }
+      50%  { transform: translate(-50%, -50%) rotate(180deg) translateX(110px) scale(1.08); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(80px) scale(1); }
+    }
+    
+    @keyframes orbit2 {
+      0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(130px) scale(1.05); }
+      50%  { transform: translate(-50%, -50%) rotate(180deg) translateX(150px) scale(0.98); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(130px) scale(1.05); }
+    }
+    
+    @keyframes orbit3 {
+      0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(100px) scale(1); }
+      50%  { transform: translate(-50%, -50%) rotate(180deg) translateX(120px) scale(1.1); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(100px) scale(1); }
+    }
+
     /* ----- GLASSMORPHISM CORE (PREMIUM) ----- */
     .glass-card, .glass-nav, .glass-dark, .glass-panel {
       background: rgba(8, 8, 8, 0.55);
@@ -275,9 +314,17 @@
   <!-- ambient & blob layer -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+<div class="blob-wrap blob-1">
+  <div class="blob"></div>
+</div>
+
+<div class="blob-wrap blob-2">
+  <div class="blob"></div>
+</div>
+
+<div class="blob-wrap blob-3">
+  <div class="blob"></div>
+</div>
   <div class="noise-overlay"></div>
 
   <!-- Toast Notification (unchanged structure) -->
