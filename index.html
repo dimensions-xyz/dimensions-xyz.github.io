@@ -377,8 +377,8 @@
             <span data-key="heroBadge" class="text-[#D8B4FE] font-semibold text-sm tracking-wide">Mobil · Web · Backend</span>
           </div>
           <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15]">
-            <span data-key="heroLine1">Fikirlerinizin</span> <br> 
-            <span class="text-gradient-mor" data-key="heroLine2">gerçeğe dönüştüğü yer</span>
+           <span id="hero-line-1">Fikirlerinizin</span><br>
+<span id="hero-line-2" class="text-gradient-mor"></span>
           </h1>
           <p data-key="heroDesc" class="text-gray-300 text-lg md:text-xl mt-6 max-w-xl leading-relaxed">ByteFlowy, güçlü mobil uygulamalardan akıllı web platformlarına kadar premium dijital deneyimler sunar. Sizi konseptten küresel lansmana kadar yönlendiriyoruz.</p>
           <div class="flex flex-wrap gap-4 mt-8">
@@ -539,6 +539,58 @@
       if(lang === 'en') enBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } }); 
       else trBtns.forEach(btn => { if(btn) { btn.classList.remove('bg-gray-100', 'text-gray-800'); btn.classList.add('lang-active'); } });
       updateValidationMessages();
+      if (lang === 'tr') {
+  staggerDecrypt(
+    "Fikirlerinizin",
+    "gerçeğe dönüştüğü yer"
+  );
+} else {
+  staggerDecrypt(
+    "Where ideas",
+    "turn into reality"
+  );
+}
+function staggerDecrypt(line1Text, line2Text) {
+  const el1 = document.getElementById("hero-line-1");
+  const el2 = document.getElementById("hero-line-2");
+
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+
+  let frame1 = 0;
+  let frame2 = 0;
+
+  function run() {
+    // --- LINE 1 ---
+    let out1 = "";
+    for (let i = 0; i < line1Text.length; i++) {
+      if (i < frame1) out1 += line1Text[i];
+      else out1 += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    // --- LINE 2 ---
+    let out2 = "";
+    for (let i = 0; i < line2Text.length; i++) {
+      if (i < frame2) out2 += line2Text[i];
+      else out2 += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    el1.textContent = out1;
+    el2.textContent = out2;
+
+    // stagger timing (2. satır biraz gecikmeli başlar)
+    if (frame1 < line1Text.length) frame1++;
+    if (frame1 > 5 && frame2 < line2Text.length) frame2++;
+
+    if (frame1 < line1Text.length || frame2 < line2Text.length) {
+      setTimeout(run, 45);
+    } else {
+      el1.textContent = line1Text;
+      el2.textContent = line2Text;
+    }
+  }
+
+  run();
+}
     }
     document.getElementById('lang-en')?.addEventListener('click', () => setLanguage('en')); 
     document.getElementById('lang-tr')?.addEventListener('click', () => setLanguage('tr')); 
@@ -558,6 +610,7 @@
       }); 
     });
   </script>
+  
 </body>
 
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e70e875acbc94f209a31f34cfaad28f3"}'></script>
