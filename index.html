@@ -289,8 +289,10 @@
     }
     /* responsive glass integrity */
     @media (max-width: 768px) {
-      .blob-1, .blob-2, .blob-3 { filter: blur(60px); opacity: 0.2; }
-      .glass-card { background: rgba(8, 8, 8, 0.65); backdrop-filter: blur(12px); }
+      .blob {
+        filter: blur(35px) !important;
+        transform: translate3d(-50%, -50%, 0) scale(0.9) !important;
+      }
     }
     /* custom scroll */
     ::-webkit-scrollbar { width: 6px; }
