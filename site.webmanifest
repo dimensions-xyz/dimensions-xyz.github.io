@@ -1,0 +1,16 @@
+{
+  "name": "ByteFlowy",
+  "short_name": "ByteFlowy",
+  "description": "App Development, Backend & AI Solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#130F40",
+  "background_color": "#050505",
+  "icons": [
+    {
+      "src": "byteflowy-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
